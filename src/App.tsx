@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.scss';
-import DashboardPage from "./pages/Dashboard";
-import SettingsPage from "./pages/Settings";
-import LoginPage from "./pages/Login";
+import DashboardPage from "./pages/dashboard/Dashboard";
+import SettingsPage from "./pages/settings/Settings";
+import LoginPage from "./pages/login/Login";
 import {
     BrowserRouter as Router,
     Switch,
