@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "../components/Button";
 import TextInput from "../components/TextInput";
-const LoginPage: React.FC = () =>{
+const LoginPage = () =>{
     // TODO: use a context for login information or use redux
 
     return (
