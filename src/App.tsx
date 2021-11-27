@@ -18,7 +18,7 @@ function App() {
     },[])
 
     const loginUser = () => {
-        setUserType('admin')
+        setUserType('guest')
     }
 
   return (
