@@ -7,8 +7,8 @@ type LoginState = {
 
 const initialState: LoginState = {
     authData: {
-        name: '',
-        token: 'null'
+        user: {},
+        credential: {}
     }};
 
 const loginSlice = createSlice({

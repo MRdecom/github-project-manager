@@ -8,17 +8,16 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "./rootReducer";
 
 function App() {
-    const [userType, setUserType] = useState('admin');
+    const [userType, setUserType] = useState('guest');
+    const {authData} = useSelector((state: RootState) => state.login);
 
     useEffect(()=>{
-        loginUser();
-    },[])
-
-    const loginUser = () => {
-        setUserType('guest')
-    }
+        setUserType(authData.credential?.accessToken ?'admin':'guest')
+    },[authData])
 
   return (
         <div className="App">

@@ -1,10 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import {logOutAuth} from "../pages/login/LoginActions";
+import {useDispatch} from "react-redux";
 
 const SideBar = () =>{
-    const signOutUser = () => {
-        // TODO: add signOut method
-        console.log('signOut!!')
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const signOutUser = async () => {
+        dispatch(logOutAuth())
+        history.push("/");
     }
 
     // TODO: add dynamic selection for sidebar

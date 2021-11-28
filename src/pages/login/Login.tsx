@@ -1,19 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {authUser} from "./LoginActions";
-import {RootState} from "../../rootReducer";
 
 const LoginPage = () =>{
     const dispatch = useDispatch();
-    const loginData = useSelector((state: RootState) => state.login);
     const [nameInput,setNameInput] = useState('');
-
-    useEffect(()=>{
-        console.log(loginData.authData);
-        debugger
-    },[loginData])
 
     return (
         <div className='login-page'>
@@ -24,10 +17,11 @@ const LoginPage = () =>{
                 </div>
                 <TextInput label='Username or email address' onChange={(a)=>{
                     setNameInput(a.target.value);}}/>
-                <TextInput label='Password' onChange={(a)=>{
+                {/*<TextInput label='Password' onChange={(a)=>{
                     console.log(a.target.value);}}
-                type='password'/>
-                <Button buttonText='Sign in' onClick={()=>{dispatch(authUser({name: nameInput, token: '111'}))}} />
+                type='password'/>*/}
+                <Button buttonText='Sign in' onClick={() => dispatch(authUser(nameInput))}
+                />
             </div>
         </div>
     )

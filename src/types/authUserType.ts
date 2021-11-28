@@ -1,4 +1,5 @@
 export type AuthData = {
-    name: string,
-    token: string,
+    user?: object,
+    credential: object,
+    error?: object
 }
