@@ -3,3 +3,11 @@ export type AuthData = {
     credential: object,
     error?: object
 }
+
+export type ProfileData = {
+    user: {
+        displayName:string,
+        email:string,
+        photoURL:string
+    }
+}

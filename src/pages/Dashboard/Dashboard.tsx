@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../rootReducer";
-import {getRandomGithubText, getUserDetail} from "./CommonActions";
+import {getRandomGithubText} from "./CommonActions";
+import {RandomTextBlock} from "./RandomTextBlock";
+import {UserInformation} from "./UserInformation";
 
 const DashboardPage = () =>{
     const dispatch = useDispatch();
@@ -15,15 +17,9 @@ const DashboardPage = () =>{
 
     return (
         <div className='dashboard-page'>
-            <p onClick={()=>{dispatch(getUserDetail(authData))}}><strong>Some GitHub Words : </strong>{randomText}</p>
-            <div className='user-information-block'>
-                <h3>User Information</h3>
-                <img className='avatar' src={authData.user.photoURL} alt="User"/> <br/>
-                <strong>username : </strong> {authData.user.displayName} <br/>
-                <strong>email : </strong>{authData.user.email} <br/>
-            </div>
+            <RandomTextBlock randomText={randomText}/>
+            <UserInformation authData={authData}/>
         </div>
-
     )
 }
 
