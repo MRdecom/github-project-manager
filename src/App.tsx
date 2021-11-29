@@ -1,36 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
-import DashboardPage from "./pages/dashboard/Dashboard";
-import SettingsPage from "./pages/settings/Settings";
-import LoginPage from "./pages/login/Login";
 import {
-    BrowserRouter as Router,
+    Router,
     Switch,
     Route
 } from "react-router-dom";
-import {useSelector} from "react-redux";
-import {RootState} from "./rootReducer";
+import history from "./history";
+import {accessToken} from "./constants/constants";
+import {reLogin} from "./pages/Login/LoginActions";
+import {useDispatch} from "react-redux";
+import {LoginPage, DashboardPage, SettingsPage} from "./pages";
+import {Layout, PrivateRoute} from "./components";
+import {pageUrls} from "./constants/pageUrls";
 
 function App() {
-    const [userType, setUserType] = useState('guest');
-    const {authData} = useSelector((state: RootState) => state.login);
-
-    useEffect(()=>{
-        setUserType(authData.credential?.accessToken ?'admin':'guest')
-    },[authData])
+    const dispatch = useDispatch();
+    useEffect(()=> {
+        const token = localStorage.getItem(accessToken);
+        if(token){
+            dispatch(reLogin(token));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
   return (
         <div className="App">
-            <Router>
+            <Router history={history}>
                 <Switch>
-                    {userType === 'guest' ?
-                        <Route exact component={LoginPage} />
-                        :
-                        <>
-                            <Route exact path='/' component={DashboardPage} />
-                            <Route path="/settings" component={SettingsPage} />
-                        </>
-                    }
+                    <Route path={pageUrls.login} exact component={LoginPage} />
+                    <Layout>
+                        <PrivateRoute exact path={pageUrls.home}><DashboardPage/></PrivateRoute>
+                        <PrivateRoute exact path={pageUrls.settings}><SettingsPage/></PrivateRoute>
+                    </Layout>
                 </Switch>
             </Router>
         </div>

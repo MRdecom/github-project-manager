@@ -1,7 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import loginReducer from './pages/login/loginSlice';
+import loginReducer from './pages/Login/LoginSlice';
+import CommonReducer from './pages/Dashboard/CommonSlice';
 const rootReducer = combineReducers({
-    login: loginReducer
+    login: loginReducer,
+    common: CommonReducer
 });
 
 export type RootState = ReturnType<any>;

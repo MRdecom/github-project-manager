@@ -1,11 +1,11 @@
 // PAGES
-@import "pages/loginPages";
-@import "pages/dasgboardPages";
-@import "pages/settingPage";
+@import "../pages/Login/loginPages";
+@import "../pages/Dashboard/dasgboardPages";
+@import "../pages/Settings/settingPage";
 
 // COMPONENTS
-@import "components/button";
-@import "components/inputs";
-@import "components/header";
-@import "components/layout";
-@import "components/sideBar";
+@import "../components/Button/button";
+@import "../components/TextInput/inputs";
+@import "../components/Layout/Header/header";
+@import "../components/Layout/layout";
+@import "../components/Layout/SideBar/sideBar";
