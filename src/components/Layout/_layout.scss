@@ -5,7 +5,8 @@
     height: calc(100% - 60px);
   }
   .content-block{
-    padding: 16px;
-
+    padding: 16px 32px;
+    width: 99%;
+    overflow: auto;
   }
 }

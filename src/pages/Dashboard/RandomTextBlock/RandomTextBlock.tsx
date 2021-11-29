@@ -5,7 +5,7 @@ type Props = {
 }
 
 const RandomTextBlock = (props: Props) => {
-    return <p><strong>Some GitHub Words : </strong>{props.randomText}</p>
+    return <p className='random-text'><strong>Some GitHub Words : </strong>{props.randomText}</p>
 }
 
 export default RandomTextBlock;

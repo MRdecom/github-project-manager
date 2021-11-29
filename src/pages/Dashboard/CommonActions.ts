@@ -1,45 +1,38 @@
-import axios from "axios";
-import { Octokit } from "@octokit/core";
 import http from "../../http";
 import {AppDispatch} from "../../store";
-import {getRandomText} from "./CommonSlice";
+import {getMyRepo, getRandomText, getUserRepoList} from "./CommonSlice";
 
 export const getRandomGithubText = (): any => {
-    return (dispatch: AppDispatch) => {
-        http.get('/zen').then(resp=> {
-                dispatch(getRandomText({randomText: resp.data}))
-            }).catch(()=>{
+    return async (dispatch: AppDispatch) => {
+        const result = await http.get('/zen')
+        try{
+            dispatch(getRandomText({randomText: result.data}))
+        } catch(err){
             dispatch(getRandomText({randomText: 'there is nothing here.'}))
-        })
+        }
     }
 }
 
-// TODO: repo listesi hazırlancak.
-export const getUserDetail = (userName: string): any => {
+export const getUserRepos = (userName: string): any => {
     return async (dispatch: AppDispatch) => {
         const result = await http.get(`/users/${userName}/subscriptions`);
         try{
-            console.log(result);
+            debugger
+            dispatch(getUserRepoList(result.data))
         } catch (error){
-            console.log(error);
+            dispatch(getUserRepoList([]))
         }
     };
 }
 
-// TODO: repo listesi hazırlancak.
 export const getMyRepos = (): any => {
     return async (dispatch: AppDispatch) => {
         const result = await http.get(`/user/repos`);
         try{
-            console.log(result);
+            dispatch(getMyRepo(result.data))
         } catch (error){
-            console.log(error);
+            dispatch(getMyRepo([]))
+            alert(JSON.stringify(error))
         }
     };
 }
-
-// onClick={()=>{dispatch(getMyRepos())}}
-
-
-// UPDATE: /repos/{owner}/{repo}
-// DELETE: /repos/{owner}/{repo}

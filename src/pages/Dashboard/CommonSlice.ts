@@ -1,23 +1,35 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 type RandomText = {
-    randomText: string
+    randomText?: string;
+    myRepoList?: object[];
+    userRepoList?: object[];
 }
 const initialState = {
-    randomText: ''
+    randomText: '',
+    myRepoList: [{}],
+    userRepoList: [{}]
 };
 
 const CommonSlice = createSlice({
-    name: "RandomText",
+    name: "Common",
     initialState,
     reducers: {
         getRandomText(state, action: PayloadAction<RandomText>) {
             state.randomText = action.payload.randomText || initialState.randomText;
+        },
+        getMyRepo(state, action: PayloadAction<object[]>) {
+            state.myRepoList = action.payload || [];
+        },
+        getUserRepoList(state, action: PayloadAction<object[]>) {
+            state.userRepoList = action.payload || [];
         }
     }
 })
 
 export const {
-    getRandomText
+    getRandomText,
+    getMyRepo,
+    getUserRepoList
 } = CommonSlice.actions;
 
 export default CommonSlice.reducer;
